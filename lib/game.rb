@@ -3,11 +3,12 @@ require 'computer'
 
 class Game
   include Messages
-  attr_reader :computer, :computer_pattern
+  attr_reader :computer, :computer_pattern, :total_turns
 
   def initialize(level='beginner')
     @computer = Computer.new
     @computer_pattern = @computer.pattern
+    @total_turns = 0
   end
 
   def welcome
@@ -39,7 +40,16 @@ class Game
   end
 
   def start_game(player_response)
-    # require "pry";binding.pry
-    turn = Turn.new(play_response, @computer)
+    while player_response != @computer_pattern.join
+      turn = Turn.new(player_response, @computer)
+      player_elements = turn.count_elements(player_response.split(''))
+      computer_elements = turn.count_elements(@computer.pattern)
+      # play
+    # else
+    require "pry";binding.pry
+      turn.compare_count_elements(player_elements, computer_elements)
+      @total_turns += 1
+      meassage_wrong_guess(player_response)
+    end
   end
 end
