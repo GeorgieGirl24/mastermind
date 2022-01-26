@@ -24,8 +24,16 @@ module Messages
     p "What's your guess?"
   end
 
-  def message_cheat
-    p 'This is the cheat!'
+  def self.message_cheat(computer_pattern)
+    p "This is my secret '#{computer_pattern.join}'. Use with discression!"
     p 'What is your guess?'
+  end
+
+  def self.message_too_short
+    'Please try again. Your response is too short.'
+  end
+
+  def self.message_too_long
+    'Please try again. Your response is too long.'
   end
 end
