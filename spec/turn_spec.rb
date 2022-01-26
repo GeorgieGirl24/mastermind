@@ -187,4 +187,44 @@ RSpec.describe Turn do
     expected = {"R"=>[1, 1], "G"=>[1, 2], "B"=>[1], "Y"=>[1, 1]}
     expect(turn.group_counted_elements(compared_groups)).to eq expected
   end
+
+  it 'can count how many elements are in the correct position' do
+    player_guess = 'RGBY'
+    computer = instance_double('Computer', pattern: ['G', 'R', 'G', 'Y'],
+                                           level: 'beginner',
+                                           letter_choices: {'beginner': ['R', 'B', 'G', 'Y']},
+                                            number_characters: {'beginner': 4}
+    )
+    turn = Turn.new(player_guess, computer)
+
+    expect(turn.number_correct_elements.class).to eq Integer
+    expect(turn.number_correct_elements).to eq 1
+    expect(turn.number_correct_elements).to_not eq 3
+  end
+
+  it 'can set the element into a hash with' do
+    player_guess = 'RGBY'
+    computer = instance_double('Computer', pattern: ['G', 'R', 'G', 'Y'],
+                                           level: 'beginner',
+                                           letter_choices: {'beginner': ['R', 'B', 'G', 'Y']},
+                                            number_characters: {'beginner': 4}
+    )
+    turn = Turn.new(player_guess, computer)
+
+    player_elements = turn.seperate_counted_elements(turn.count_elements(player_guess.split('')))
+    computer_elements = turn.seperate_counted_elements(turn.count_elements(computer.pattern))
+
+    player_expected = { "R"=>[{:player=>1}],
+                        "G"=>[{:player=>1}],
+                        "B"=>[{:player=>1}],
+                        "Y"=>[{:player=>1}]
+                      }
+    computer_expected = { "R"=>[{:player=>1}, {:computer=>1}],
+                          "G"=>[{:player=>1}, {:computer=>2}],
+                          "B"=>[{:player=>1}],
+                          "Y"=>[{:player=>1}, {:computer=>1}]
+                        }
+    expect(turn.count_player_element(player_elements)).to eq player_expected
+    expect(turn.count_computer_element(computer_elements, player_expected)).to eq computer_expected
+  end
 end

@@ -3,10 +3,9 @@ require 'messages'
 
 class Turn
   include Messages
-  attr_reader :player_guess, :computer # :computer_pattern
-  def initialize(player_guess, computer) #computer_pattern
+  attr_reader :player_guess, :computer
+  def initialize(player_guess, computer)
     @player_guess = player_guess
-    # @computer_pattern = computer_pattern
     @computer = computer
   end
 
@@ -58,7 +57,7 @@ class Turn
     # return value is a hash
   end
 
-  def seperate_counted_elements(element)#, type)
+  def seperate_counted_elements(element)
     # element must be a Hash
     type = determine_type(element)
     element.map do |letter, number|
@@ -69,11 +68,20 @@ class Turn
 
   def compare_count_elements(player_elements, computer_elements)
     # elements need to be both hashes
+    count_computer_element(computer_elements, count_player_element(player_elements))
+    # return value is a hash
+  end
+
+  def count_player_element(player_elements)
     hash = {}
     player_elements.each do |element|
        hash[element.keys.first] = [element.values.first]
-     end
+    end
+    hash
+  end
 
+  def count_computer_element(computer_elements, count_player_elements)
+    hash = count_player_elements
     computer_elements.each do |element|
       if !hash[element.keys.first]
          hash[element.keys.first] = [element.values.first]
@@ -121,5 +129,12 @@ class Turn
       end
     end
     hash
+  end
+
+  def number_correct_elements
+    compared = @player_guess.split('').zip(computer.pattern)
+    compared.count do |set|
+      set[0] == set[1]
+    end
   end
 end
