@@ -74,19 +74,30 @@ class Turn
 
   def count_player_element(player_elements)
     hash = {}
-    player_elements.each do |element|
-       hash[element.keys.first] = [element.values.first]
+    # binding.pry
+    # player_elements.each do |element|
+    #    hash[element.keys.first] = [element.values.first]
+    # end
+    player_elements.each do |letter, number|
+      hash[letter] = [number]
     end
     hash
   end
 
   def count_computer_element(computer_elements, count_player_elements)
     hash = count_player_elements
-    computer_elements.each do |element|
-      if !hash[element.keys.first]
-         hash[element.keys.first] = [element.values.first]
+    # computer_elements.each do |element|
+    #   if !hash[element.keys.first]
+    #      hash[element.keys.first] = [element.values.first]
+    #   else
+    #     hash[element.keys.first] << element.values.first
+    #   end
+    # end
+    computer_elements.each do |letter, number|
+      if !hash[letter]
+        hash[letter] = [number]
       else
-        hash[element.keys.first] << element.values.first
+        hash[letter] << number
       end
     end
     hash
