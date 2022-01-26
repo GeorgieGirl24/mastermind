@@ -1,9 +1,13 @@
 require 'messages'
+require 'computer'
 
 class Game
   include Messages
-  def initialize
+  attr_reader :computer, :computer_pattern
 
+  def initialize(level='beginner')
+    @computer = Computer.new
+    @computer_pattern = @computer.pattern
   end
 
   def welcome
@@ -30,27 +34,12 @@ class Game
   def play
     message_play
     play_response = gets.chomp.upcase
-    evaluate_response(play_response)
-  end
-
-  def evaluate_response(player_response)
-    cheat if player_response == 'C' || player_response == 'CHEAT'
-    quit if player_response == 'Q' || player_response == 'QUIT'
-    # elsif player_response == 'P' || player_response == 'PLAY'
-    start_game(player_response)
-
-    # end
-  end
-
-  def cheat
-    "This is a cheat"
-    message_cheat
-    player_response = gets.chomp.upcase
-    start_game(player_response)
+    start_game(play_response)
+    # evaluate_response(play_response)
   end
 
   def start_game(player_response)
     # require "pry";binding.pry
-
+    turn = Turn.new(play_response, @computer)
   end
 end
