@@ -2,8 +2,8 @@ module Messages
   def message_welcome_introduction
     p "Welcome to MASTERMIND"
     p "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
-    p "> "
-    puts
+    print "> "
+    # puts
   end
 
   def message_instructions
@@ -18,23 +18,26 @@ module Messages
     p 'Goodbye!'
   end
 
-  def message_play
-    p 'I have generated a beginner sequence with four elements made up of:'
+  def message_play(level='beginner')
+    p "I have generated a #{level} sequence with four elements made up of:"
     p '(r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.'
-    p "What's your guess?"
+  end
+
+  def message_guess
+    print "What's your guess? "
   end
 
   def self.message_cheat(computer_pattern)
     p "This is my secret '#{computer_pattern.join}'. Use with discression!"
-    p 'What is your guess?'
+    print 'What is your guess? '
   end
 
   def self.message_too_short
-    'Please try again. Your response is too short.'
+    p '🚨 Please try again. Your response is too short. 🚨'
   end
 
   def self.message_too_long
-    'Please try again. Your response is too long.'
+    p '🚨 Please try again. Your response is too long. 🚨'
   end
 
   def message_wrong_guess(player_response, placed_correct_elements, number_correct_positions)
@@ -43,16 +46,16 @@ module Messages
   end
 
   def message_number_of_turns(total_turns)
-    p "You've taken #{total_turns} guess"
+    p "You've taken #{total_turns} guesses"
   end
 
   def message_next_guess
-    p "What's your next guess?"
+    print "What's your next guess? "
   end
 
   def message_winner(total_turns)
     p "🎉You've guessed my secret code in #{ total_turns } guesses!🎉"
-    p 'Would you care to play again? [y/n]'
+    print 'Would you care to play again? [y/n] '
   end
 
   def message_replay
