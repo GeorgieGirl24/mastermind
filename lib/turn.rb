@@ -1,5 +1,5 @@
 require 'pry'
-require 'messages'
+require_relative 'messages'
 
 class Turn
   include Messages
@@ -60,10 +60,12 @@ class Turn
   def seperate_counted_elements(element)
     # element must be a Hash
     type = determine_type(element)
+    hash = {}
     element.map do |letter, number|
-      {letter => {type => number}}
+      hash[letter] = {type => number}
     end
-    # return value is an array
+    hash
+    # return value is an hash
   end
 
   def compare_count_elements(player_elements, computer_elements)
@@ -74,10 +76,6 @@ class Turn
 
   def count_player_element(player_elements)
     hash = {}
-    # binding.pry
-    # player_elements.each do |element|
-    #    hash[element.keys.first] = [element.values.first]
-    # end
     player_elements.each do |letter, number|
       hash[letter] = [number]
     end
@@ -86,13 +84,6 @@ class Turn
 
   def count_computer_element(computer_elements, count_player_elements)
     hash = count_player_elements
-    # computer_elements.each do |element|
-    #   if !hash[element.keys.first]
-    #      hash[element.keys.first] = [element.values.first]
-    #   else
-    #     hash[element.keys.first] << element.values.first
-    #   end
-    # end
     computer_elements.each do |letter, number|
       if !hash[letter]
         hash[letter] = [number]
@@ -104,7 +95,13 @@ class Turn
   end
 
   def determine_type(element)
-    if element.class == String || element.keys.join == player_guess
+    test = []
+    element.map do |letter, number|
+      number.times do
+        test << letter
+      end
+    end
+    if test.join == player_guess
       :player
     else
       :computer
@@ -113,29 +110,33 @@ class Turn
 
   def count_like_elements(elements)
     # elements must be a hash
-    group_counted_elements(elements).values.map do |element|
-      if element.count > 1
-        if element.first == element.last
-          element.last
+    temp = elements.map do |letter, numbers|
+      if numbers.count > 1
+        if numbers.first == numbers.last
+          numbers.last
         else
-          element.find {|i| i >= i}
+          numbers.min
         end
       else
         0
       end
     end.sum
+    temp
     # return value is an integer
   end
 
   def group_counted_elements(elements)
     # elements must be a hash
     hash = {}
+    # require 'pry';binding.pry
     elements.map do |k,v|
       v.map do |element|
         if !hash[k]
-          hash[k] = [element.values.sum]
+          # hash[k] = [element.values.sum]
+          hash[k] = [v.sum]
         else
-          hash[k] << element.values.sum
+          # hash[k] << element.values.sum
+          hash[k] << v.sum
         end
       end
     end
