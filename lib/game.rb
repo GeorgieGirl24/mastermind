@@ -1,5 +1,6 @@
-require 'messages'
-require 'computer'
+require_relative 'messages'
+require_relative 'computer'
+require_relative 'turn'
 
 class Game
   include Messages
@@ -44,12 +45,28 @@ class Game
       turn = Turn.new(player_response, @computer)
       player_elements = turn.count_elements(player_response.split(''))
       computer_elements = turn.count_elements(@computer.pattern)
-      # play
-    # else
-    require "pry";binding.pry
-      turn.compare_count_elements(player_elements, computer_elements)
+
+      compared_counts = turn.compare_count_elements(player_elements, computer_elements)
+      guessed_correct_elements = turn.number_correct_elements
+      number_correct_positions = turn.count_like_elements(compared_counts)
       @total_turns += 1
-      meassage_wrong_guess(player_response)
+
+      message_wrong_guess(player_response, guessed_correct_elements, number_correct_positions)
+      message_number_of_turns(@total_turns)
+      message_next_guess
+      player_response = gets.chomp.upcase
     end
+    if player_response == @computer_pattern.join
+      message_winner(@total_turns)
+      play_again = gets.chomp.upcase
+      if play_again == 'Y' || play_again == 'YES'
+        message_replay
+        game = Game.new
+        game.play
+      else
+        quit 
+      end
+    end
+
   end
 end
