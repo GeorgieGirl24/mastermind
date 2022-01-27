@@ -16,6 +16,7 @@ module Messages
 
   def message_quit
     p 'Goodbye!'
+    puts
   end
 
   def message_play(level='beginner')
@@ -47,6 +48,7 @@ module Messages
 
   def message_number_of_turns(total_turns)
     p "You've taken #{total_turns} guesses"
+    puts
   end
 
   def message_next_guess
