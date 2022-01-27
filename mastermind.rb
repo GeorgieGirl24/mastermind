@@ -1,4 +1,4 @@
-class Mastermind
-  game = Geme.new
-  game.welcome
-end
+require_relative './lib/game'
+
+game = Game.new
+game.welcome
