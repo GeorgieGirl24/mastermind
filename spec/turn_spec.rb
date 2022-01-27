@@ -105,7 +105,7 @@ RSpec.describe Turn do
 
     player_elements = turn.count_elements(player_guess.split(''))
 
-    player_expected = [{"R"=>{:player=>1}}, {"G"=>{:player=>1}}, {"B"=>{:player=>1}}, {"Y"=>{:player=>1}}]
+    player_expected = {"R"=>{:player=>1}, "G"=>{:player=>1}, "B"=>{:player=>1}, "Y"=>{:player=>1}}
     expect(turn.seperate_counted_elements(player_elements)).to eq player_expected
   end
 
@@ -120,7 +120,7 @@ RSpec.describe Turn do
 
     computer_elements = turn.count_elements(computer.pattern)
 
-    computer_expected = [ { "G" => { :computer=> 1} } , { "R" => { :computer => 2} }, { "Y" => { :computer => 1} } ]
+    computer_expected = { "G" => { :computer=> 1}  , "R" => { :computer => 2}, "Y" => { :computer => 1} }
     expect(turn.seperate_counted_elements(computer_elements)).to eq computer_expected
   end
 
@@ -139,7 +139,7 @@ RSpec.describe Turn do
     expect(turn.determine_type(computer_expected)).to eq :computer
   end
 
-  it 'can group letters that match' do
+  xit 'can group letters that match' do
     player_guess = 'RGBY'
     computer = instance_double('Computer', pattern: ['R', 'R', 'R', 'R'],
                                            level: 'beginner',
@@ -163,14 +163,15 @@ RSpec.describe Turn do
                                             number_characters: {'beginner': 4}
     )
     turn = Turn.new(player_guess, computer)
-    player_elements = turn.seperate_counted_elements(turn.count_elements(player_guess.split('')))
-    computer_elements = turn.seperate_counted_elements(turn.count_elements(computer.pattern))
-# require "pry";binding.
+    player_elements = turn.count_elements(player_guess.split(''))
+    computer_elements = turn.count_elements(computer.pattern)
+
     compared_groups = turn.compare_count_elements(player_elements, computer_elements)
+# binding.pry
     expect(turn.count_like_elements(compared_groups)).to eq 3
   end
 
-  it 'can group counted elements' do
+  xit 'can group counted elements' do
     player_guess = 'RGBY'
     computer = instance_double('Computer', pattern: ['G', 'R', 'G', 'Y'],
                                            level: 'beginner',
@@ -224,6 +225,7 @@ RSpec.describe Turn do
                           "B"=>[{:player=>1}],
                           "Y"=>[{:player=>1}, {:computer=>1}]
                         }
+    # require 'pry';binding.pry
     expect(turn.count_player_element(player_elements)).to eq player_expected
     expect(turn.count_computer_element(computer_elements, player_expected)).to eq computer_expected
   end
