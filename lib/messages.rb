@@ -36,4 +36,26 @@ module Messages
   def self.message_too_long
     'Please try again. Your response is too long.'
   end
+
+  def message_wrong_guess(player_response, placed_correct_elements, number_correct_positions)
+    # p "#{ player_response } has #{ placed_correct_elements } of the correct elements with #{ number_correct_positions } in the correct positions."
+    p "#{ player_response } has #{ number_correct_positions } of the correct elements with #{ placed_correct_elements } in the correct positions."
+  end
+
+  def message_number_of_turns(total_turns)
+    p "You've taken #{total_turns} guess"
+  end
+
+  def message_next_guess
+    p "What's your next guess?"
+  end
+
+  def message_winner(total_turns)
+    p "🎉You've guessed my secret code in #{ total_turns } guesses!🎉"
+    p 'Would you care to play again? [y/n]'
+  end
+
+  def message_replay
+    p 'As a reminder of how this is played...'
+  end
 end
