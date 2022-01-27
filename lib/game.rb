@@ -42,11 +42,12 @@ class Game
   def cheat
     Messages.message_cheat(@computer.pattern)
     player_response = gets.chomp.upcase
+    @total_turns += 1
     start_game(player_response)
   end
 
   def evaluate(player_response)
-    if player_response == 'I' || player_response == 'INTRODUCTION'
+    if player_response == 'I' || player_response == 'INSTRUCTION'
       instructions
     elsif player_response == 'Q' || player_response == 'QUIT'
       quit
@@ -101,6 +102,7 @@ class Game
   end
 
   def matched_pair
+    @total_turns += 1
     message_winner(@total_turns)
     play_again = gets.chomp.upcase
     if play_again == 'Y' || play_again == 'YES'
