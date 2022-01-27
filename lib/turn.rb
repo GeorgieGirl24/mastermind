@@ -9,44 +9,6 @@ class Turn
     @computer = computer
   end
 
-  def evaluate_response(player_response)
-    cheat if player_response == 'C' || player_response == 'CHEAT'
-    quit if player_response == 'Q' || player_response == 'QUIT'
-    start_turn
-  end
-
-  def cheat
-    "This is a cheat"
-    Messages.message_cheat(@computer.pattern)
-    player_response = gets.chomp.upcase
-    start_turn
-  end
-
-  def quit
-    message_quit
-    exit(true)
-  end
-
-  def start_turn
-
-  end
-
-  def evaluate_length
-    if too_short?
-      message_too_short
-    elsif too_long?
-      message_too_long
-    end
-  end
-
-  def too_short?
-    player_guess.length < @computer.number_characters[@computer.level.to_sym]
-  end
-
-  def too_long?
-    player_guess.length > @computer.number_characters[@computer.level.to_sym]
-  end
-
   def compare_player_computer
     @player_guess == @computer.pattern.join
   end
@@ -128,14 +90,11 @@ class Turn
   def group_counted_elements(elements)
     # elements must be a hash
     hash = {}
-    # require 'pry';binding.pry
     elements.map do |k,v|
       v.map do |element|
         if !hash[k]
-          # hash[k] = [element.values.sum]
           hash[k] = [v.sum]
         else
-          # hash[k] << element.values.sum
           hash[k] << v.sum
         end
       end
