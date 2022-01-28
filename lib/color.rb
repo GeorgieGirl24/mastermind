@@ -1,4 +1,5 @@
 require 'colorize'
+require 'pry'
 
 module Color
   def color_check_response(player_response)
@@ -89,5 +90,27 @@ module Color
     else
       total_turns.red.bold
     end
+  end
+
+  def color_level_integer(level)
+    if level == 'beginner'
+      "4".yellow.bold
+    elsif level == 'intermediate'
+      "5".light_blue.bold
+    elsif level == 'advanced'
+      "6".magenta.bold
+    end
+    # returns integer
+  end
+
+  def color_letter_english_number(level)
+    if level == 'beginner'
+      "FOUR".yellow.bold
+    elsif level == 'intermediate'
+      "SIX".light_blue.bold
+    elsif level == 'advanced'
+      "EIGHT".magenta.bold
+    end
+    # returns english number
   end
 end
