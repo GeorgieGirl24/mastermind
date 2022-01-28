@@ -1,4 +1,5 @@
 require "colorize"
+require_relative "color"
 require 'pry'
 
 module Messages
@@ -6,11 +7,9 @@ module Messages
     puts "Welcome to MASTERMIND".white
     puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
     print "> "
-    # puts
   end
 
   def message_instructions
-    # binding.pry
     puts 'The goal here is for you to guess the order of the colors that I have selected'
     puts 'In this game, there are 4 colors that you may choose from. In order to select'
     puts "a color, press #{ "(r)ed".colorize(:red) } or #{ "(b)lue".blue } or #{ "(g)reen".green } or #{ "(y)ellow".yellow }."
@@ -25,7 +24,9 @@ module Messages
 
   def message_play(level='beginner')
     puts "I have generated a #{level} sequence with four elements made up of:"
-    puts "#{ "(r)ed".colorize(:red) }, #{ "(g)reen".green }, #{ "(b)lue".blue }, and #{ "(y)ellow".yellow }. Use (q)uit at any time to end the game."
+    # color_level_set(level)
+    # puts "#{ "(r)ed".colorize(:red) }, #{ "(g)reen".green }, #{ "(b)lue".blue }, and #{ "(y)ellow".yellow }. Use (q)uit at any time to end the game."
+    puts "#{ color_level_set(level) }. Use (q)uit at any time to end the game."
   end
 
   def message_guess
@@ -47,11 +48,15 @@ module Messages
 
   def message_wrong_guess(player_response, placed_correct_elements, number_correct_positions)
     # p "#{ player_response } has #{ placed_correct_elements } of the correct elements with #{ number_correct_positions } in the correct positions."
-    puts "#{ player_response } has #{ number_correct_positions } of the correct elements with #{ placed_correct_elements } in the correct positions."
+    color_response = color_check_response(player_response)
+    color_elements = color_number_correct_elements(number_correct_positions.to_s)
+    color_positions = color_correct_positions(placed_correct_elements.to_s)
+    puts "#{ color_response } has #{ color_elements } of the correct elements with #{ color_positions } in the correct positions."
   end
 
   def message_number_of_turns(total_turns)
-    puts "You've taken #{total_turns} guesses"
+    color_turns = color_total_turns(total_turns.to_s)
+    puts "You've taken #{ color_turns } guesses"
     puts
   end
 
@@ -61,7 +66,7 @@ module Messages
 
   def message_winner(total_turns)
     puts
-    puts "🎉 You've guessed my secret code in #{ total_turns } guesses! 🎉".bold
+    puts "🎉 You've guessed my secret code in #{ total_turns } guesses! 🎉".bold.white
     print 'Would you care to play again? [y/n] '
   end
 
