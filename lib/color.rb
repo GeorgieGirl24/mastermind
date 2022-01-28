@@ -1,5 +1,5 @@
 require 'colorize'
-require 'pry'
+
 module Color
   def color_check_response(player_response)
     temp = player_response.split('').map do |letter|
@@ -39,7 +39,6 @@ module Color
     elsif number_elements == "8"
       number_elements.white.on_red
     end
-    # binding.pry
   end
 
   def color_level_set(level)
