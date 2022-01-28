@@ -1,9 +1,11 @@
 require_relative 'messages'
+require_relative 'color'
 require_relative 'computer'
 require_relative 'turn'
 
 class Game
   include Messages
+  include Color
   attr_reader :computer,
               :computer_pattern,
               :total_turns
@@ -81,6 +83,7 @@ class Game
 
   def start_game(player_response)
     while player_response != @computer_pattern.join
+      # player_response = color_check_response(player_response)
       evaluate(player_response)
       turn = Turn.new(player_response, @computer)
       player_elements = turn.count_elements(player_response.split(''))
