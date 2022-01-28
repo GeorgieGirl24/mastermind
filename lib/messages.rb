@@ -9,10 +9,10 @@ module Messages
     print "> "
   end
 
-  def message_instructions
+  def message_instructions(level='beginner')
     puts 'The goal here is for you to guess the order of the colors that I have selected'
     puts 'In this game, there are 4 colors that you may choose from. In order to select'
-    puts "a color, press #{ "(r)ed".colorize(:red) } or #{ "(b)lue".blue } or #{ "(g)reen".green } or #{ "(y)ellow".yellow }."
+    puts "a color, press #{ color_level_set(level) }."
     puts 'There can only four letter guessed, for a viable guess.'
     puts 'Please only select the letters that are listed above.'
   end
@@ -24,8 +24,6 @@ module Messages
 
   def message_play(level='beginner')
     puts "I have generated a #{level} sequence with four elements made up of:"
-    # color_level_set(level)
-    # puts "#{ "(r)ed".colorize(:red) }, #{ "(g)reen".green }, #{ "(b)lue".blue }, and #{ "(y)ellow".yellow }. Use (q)uit at any time to end the game."
     puts "#{ color_level_set(level) }. Use (q)uit at any time to end the game."
   end
 
@@ -47,7 +45,6 @@ module Messages
   end
 
   def message_wrong_guess(player_response, placed_correct_elements, number_correct_positions)
-    # p "#{ player_response } has #{ placed_correct_elements } of the correct elements with #{ number_correct_positions } in the correct positions."
     color_response = color_check_response(player_response)
     color_elements = color_number_correct_elements(number_correct_positions.to_s)
     color_positions = color_correct_positions(placed_correct_elements.to_s)
