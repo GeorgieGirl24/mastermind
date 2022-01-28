@@ -11,9 +11,9 @@ module Messages
 
   def message_instructions(level='beginner')
     puts 'The goal here is for you to guess the order of the colors that I have selected'
-    puts 'In this game, there are 4 colors that you may choose from. In order to select'
+    puts "In this game, there are #{ color_level_integer(level) } colors that you may choose from. In order to select"
     puts "a color, press #{ color_level_set(level) }."
-    puts 'There can only four letter guessed, for a viable guess.'
+    puts "There can only #{ color_letter_english_number(level) } letters guessed, for a viable guess."
     puts 'Please only select the letters that are listed above.'
   end
 
