@@ -1,9 +1,11 @@
 require_relative 'messages'
+require_relative 'color'
 require_relative 'computer'
 require_relative 'turn'
 
 class Game
   include Messages
+  include Color
   attr_reader :computer,
               :computer_pattern,
               :total_turns

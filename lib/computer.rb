@@ -2,7 +2,6 @@ require 'pry'
 class Computer
   attr_reader :level, :pattern, :letter_choices, :number_characters
   def initialize(level='beginner')
-  # binding.pry
     @level = level
     @letter_choices = {
                         'beginner': ['R', 'B', 'G', 'Y'],
