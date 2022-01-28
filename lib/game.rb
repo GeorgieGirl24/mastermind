@@ -42,7 +42,6 @@ class Game
   def cheat
     Messages.message_cheat(@computer.pattern)
     player_response = gets.chomp.upcase
-    @total_turns += 1
     start_game(player_response)
   end
 
