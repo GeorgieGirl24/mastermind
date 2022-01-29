@@ -85,4 +85,8 @@ RSpec.describe Game do
     # require "pry";binding.pry
     expect(game.total_turns).to eq 1
   end
+
+  it 'can be intermediate level' do
+
+  end
 end
