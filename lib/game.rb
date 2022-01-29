@@ -11,7 +11,7 @@ class Game
               :total_turns
 
   def initialize(level='beginner')
-    @computer = Computer.new
+    @computer = Computer.new(level)
     @computer_pattern = @computer.pattern
     @total_turns = 0
   end
@@ -20,6 +20,26 @@ class Game
     message_welcome_introduction
     start_response = gets.chomp.upcase
     evaluate(start_response)
+  end
+
+  def level_choice
+    message_level_choice
+    player_level_choice = gets.chomp.downcase
+    if (player_level_choice != 'b' || player_level_choice != 'beginner') &&
+      (player_level_choice == 'i' || player_level_choice == 'intermediate') ||
+      (player_level_choice == 'a' || player_level_choice == 'advanced')
+      if player_level_choice == 'i' || player_level_choice == 'intermediate'
+        @computer = Computer.new('intermediate')
+        @computer_pattern = @computer.pattern
+        play('intermediate', @computer.number_characters[:intermediate])
+      else
+        @computer = Computer.new('advanced')
+        @computer_pattern = @computer.pattern
+        play('advanced', @computer.number_characters[:advanced])
+      end
+    else
+      evaluate_level(player_level_choice)
+    end
   end
 
   def instructions
@@ -34,8 +54,8 @@ class Game
     exit(true)
   end
 
-  def play
-    message_play
+  def play(level='beginner', number_characters=4)
+    message_play(level, number_characters)
     message_guess
     play_response = gets.chomp.upcase
     start_game(play_response)
@@ -47,6 +67,17 @@ class Game
     start_game(player_response)
   end
 
+  def evaluate_level(player_response)
+    if player_level_choice == 'i' || player_level_choice == 'intermediate'
+      'intermediate'
+    elsif player_level_choice == 'a' || player_level_choice == 'advanced'
+      'advanced'
+    else
+      message_level_error
+      level_choice
+    end
+  end
+
   def evaluate(player_response)
     if player_response == 'I' || player_response == 'INSTRUCTION'
       instructions
@@ -55,7 +86,7 @@ class Game
     elsif player_response == 'C' || player_response == 'CHEAT'
       cheat
     elsif player_response == 'P' || player_response == 'PLAY'
-      play
+      level_choice
     elsif player_response.length != @computer.number_characters[@computer.level.to_sym]
       evaluate_length(player_response)
       player_response = gets.chomp.upcase
@@ -108,10 +139,28 @@ class Game
     play_again = gets.chomp.upcase
     if play_again == 'Y' || play_again == 'YES'
       message_replay
+      level_choice
       game = Game.new
       game.play
     else
       quit
+    end
+  end
+
+  def replay
+    message_level_choice
+    player_level_choice = gets.chomp.downcase
+    if player_level_choice == 'i' || player_level_choice == 'intermediate'
+      game = Game.new('intermediate')
+      game.play('intermediate', @computer.number_characters[:intermediate])
+    elsif player_level_choice == 'i' || player_level_choice == 'intermediate'
+      game = Game.new('advanced')
+      game.play('advanced', @computer.number_characters[:advanced])
+    elsif player_level_choice == 'b' || player_level_choice == 'beginner'
+      game = Game.new
+      game.play
+    else
+    evaluate_level(player_level_choice)
     end
   end
 end
