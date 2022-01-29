@@ -17,13 +17,21 @@ module Messages
     puts 'Please only select the letters that are listed above.'
   end
 
+  def message_level_choice
+    puts "You have your choice of levels. If you choose #{ "(b)eginner".green }, you will have #{ "four".green.bold } colors and four elements to guess."
+    puts "If you choose #{ "(i)ntermediate".yellow }, you will have five colors with #{ "six".yellow.bold } character to guess."
+    puts "If you choose #{ "(a)dvanced".red }, you will have six colors with #{ "eight".red.bold } characters to guess."
+    puts 'What is your level choice?'
+  end
+
   def message_quit
     puts 'Goodbye!'
     puts
   end
 
-  def message_play(level='beginner')
-    puts "I have generated a #{level} sequence with four elements made up of:"
+  def message_play(level='beginner', number_characters=4)
+    numeric = find_english_number(number_characters)
+    puts "I have generated a #{ level } sequence with #{ numeric } elements made up of:"
     puts "#{ color_level_set(level) }. Use (q)uit at any time to end the game."
   end
 
@@ -69,5 +77,19 @@ module Messages
 
   def message_replay
     puts 'As a reminder of how this is played...'
+  end
+
+  def message_level_error
+    puts 'Please follow directions. That was not one of the choices'
+  end
+
+  def find_english_number(number_characters)
+    if number_characters == 4
+      'four'.magenta.bold
+    elsif number_characters == 6
+      'six'.cyan.bold
+    elsif number_characters == 8
+      'eight'.yellow.bold
+    end
   end
 end
