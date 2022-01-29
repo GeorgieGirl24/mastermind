@@ -1,5 +1,4 @@
 require 'colorize'
-require 'pry'
 
 module Color
   def color_check_response(player_response)
