@@ -33,4 +33,4 @@ yet _another_ line
 Some text with a title
 {panel}
 
-(on)This guide is the detailed intructions of step 5 of [Fortuna Integration Guide](https://confluence.corp.stripe.com/x/DfFWEQ)(on)
+💡This guide is the detailed intructions of step 5 of [Fortuna Integration Guide](https://confluence.corp.stripe.com/x/DfFWEQ)💡
