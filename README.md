@@ -28,3 +28,7 @@ This guide is the detailed intructions of step 5 of [Fortuna Integration Guide](
 a block of text surrounded with a *panel*
 yet _another_ line
 {panel}
+
+{panel:title=My Title}
+Some text with a title
+{panel}
