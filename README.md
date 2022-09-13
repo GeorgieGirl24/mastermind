@@ -13,3 +13,4 @@ $${\color{red}This \space \color{red}guide \space \color{red}is \space \color{re
 [Fortuna Integration Guide](https://confluence.corp.stripe.com/x/DfFWEQ)
 
 ==[Fortuna Integration Guide|https://confluence.corp.stripe.com/x/DfFWEQ]==
+==Fortuna Integration Guide==
