@@ -17,5 +17,7 @@ $${\color{red}This \space \color{red}guide \space \color{red}is \space \color{re
 ==Fortuna Integration Guide==
 
 {panel:title=Alert|borderStyle=solid|borderColor=#ccc|titleBGColor=#F7D6C1|bgColor=#FFFFCE}
+
 This guide is the detailed intructions of step 5 of [Fortuna Integration Guide](https://confluence.corp.stripe.com/x/DfFWEQ)
+
 {panel}
