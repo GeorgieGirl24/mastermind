@@ -21,3 +21,10 @@ $${\color{red}This \space \color{red}guide \space \color{red}is \space \color{re
 This guide is the detailed intructions of step 5 of [Fortuna Integration Guide](https://confluence.corp.stripe.com/x/DfFWEQ)
 
 {panel}
+
+
+
+{panel:title=My Title|borderStyle=dashed|borderColor=#ccc|titleBGColor=#F7D6C1|bgColor=#FFFFCE}
+a block of text surrounded with a *panel*
+yet _another_ line
+{panel}
