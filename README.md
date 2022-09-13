@@ -13,4 +13,9 @@ $${\color{red}This \space \color{red}guide \space \color{red}is \space \color{re
 [Fortuna Integration Guide](https://confluence.corp.stripe.com/x/DfFWEQ)
 
 ==[Fortuna Integration Guide|https://confluence.corp.stripe.com/x/DfFWEQ]==
+
 ==Fortuna Integration Guide==
+
+{panel:title=Alert|borderStyle=solid|borderColor=#ccc|titleBGColor=#F7D6C1|bgColor=#FFFFCE}
+$${\color{red}This \space \color{red}guide \space \color{red}is \space \color{red}the \space \color{red}detailed \space \color{red}instructions \space \color{red}of \space \color{red}step \space \color{red}5 \space \color{red}from \space \color{red}the \space \color{orange}[Fortuna Integration Guide](https://confluence.corp.stripe.com/x/DfFWEQ)}$$
+{panel}
